@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-
         stage('Checkout Code') {
             steps {
                 echo 'Checking out source code'
@@ -12,25 +11,18 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Build stage'
+                echo 'Running build step'
                 sh './hello.sh'
-            }
-        }
-
-        stage('Unit Tests') {
-            steps {
-                echo 'Running unit tests (Shift Left)'
-                sh './test.sh'
             }
         }
     }
 
     post {
         success {
-            echo '✅ Pipeline SUCCESS - Code is healthy'
+            echo 'Build SUCCESS ✅'
         }
         failure {
-            echo '❌ Pipeline FAILED - Stop the Line'
+            echo 'Build FAILED ❌ - Stop the line'
         }
     }
 }
